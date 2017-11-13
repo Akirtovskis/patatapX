@@ -164,13 +164,14 @@ paper.install(window);
     }
   }
 
+
     var circles = [];
     toolK.onKeyDown = function(event) {
       if(keyData[event.key]){
         var maxPoint = new Point(view.size.width, view.size.height);
         var randomPoint = Point.random();
         var point = maxPoint.multiply(randomPoint);
-        var newCircle = new Path.Circle(point, 500);
+        var newCircle = new Path.RegularPolygon( point, Math.floor(Math.random()*7+3) , 500)
         newCircle.fillColor = keyData[event.key].color;
         keyData[event.key].sound.play();
         circles.push(newCircle);
@@ -186,9 +187,10 @@ paper.install(window);
         currentCircle.fillColor.hue+=1;
         currentCircle.scale(0.9);
         if(circles[i].area < 1){
-      circles[i].remove();
-      circles.splice(i, 1);
-      i--;}
+          circles[i].remove();
+          circles.splice(i, 1);
+          i--;
+        }
       }
 
     }
